@@ -42,12 +42,14 @@ function rungame(gameType) {
 function checkAnswer() {
         let userAnswer = parseInt(document.getElementById("answer-box").value);
         let calculatedAnswer = calculateCorrectAnswer();
-        let isCorrect = userAnswer === calculateCorrectAnswer[0]
+        let isCorrect = userAnswer === calculatedAnswer[0];
 
         if (isCorrect){
-                alert("Great Math Skills! The answer is correct. (^_^)")
+                alert("Great Math Skills! The answer is correct. (^_^)");
+                incrementScore();
         } else {
-                alert(`Unfortunately you didn't get the answer right... you answered ${userAnswer} and the correct answer was ${calculatedAnswer[0]}!`)
+                alert(`Unfortunately you didn't get the answer right... you answered ${userAnswer} and the correct answer was ${calculatedAnswer[0]}!`);
+                incrementWrongAnswer();
         }
 
         rungame(calculatedAnswer[1])
@@ -72,9 +74,21 @@ function calculateCorrectAnswer() {
 
 }
 
-function incrementScore() {}
+/**
+ * Gets the current score from the DOM and inciments it by one
+ */
+function incrementScore() {
+        let oldScore = parseInt(document.getElementById("score").innerText);
+        document.getElementById("score").innerText = ++oldScore;
+}
 
-function incrementWrongAnswer() {}
+/**
+ * Gets the current incorrect count from the DOM and inciments it by one
+ */
+function incrementWrongAnswer() {
+        let oldScore = parseInt(document.getElementById("incorrect").innerText);
+        document.getElementById("incorrect").innerText = ++oldScore;
+}
 
 function displayAdditionQuestion(operand1, operand2) {
         document.getElementById('operand1').textContent = operand1;
